@@ -1,0 +1,59 @@
+import React from "react";
+import {
+  DivNomeCarrinho
+  } from "./styles/DivNomeCarrinho";
+
+i
+
+function Cart({ deletarItemCarrinho, lanchesCarrinho, deletarTodositens }) {
+  let total = lanchesCarrinho.reduce(
+    (valorInicial, valoresDosProdutos) =>
+      valorInicial + valoresDosProdutos.price,
+    0
+  );
+
+  return (
+      <Aside>
+        <DivNomeCarrinho>
+          <h3>Carrinho de compras</h3>
+        </DivNomeCarrinho>
+        <Sectionn>
+          {lanchesCarrinho.length === 0 ? (
+            <DivSacolaVazia>
+              <h3>Sua sacola está vazia</h3>
+              <span>Adicione itens</span>
+            </DivSacolaVazia>
+          ) : (
+            lanchesCarrinho.map((item) => (
+              <DivCardCarrinho>
+                <div className="imgCart">
+                  <img src={item.img} alt="imagem do produto" />
+                </div>
+                <div>
+                  <h4>{item.name}</h4>
+                  <p>{item.category}</p>
+                </div>
+                <button
+                  className="btnRemoverCardCarrinho"
+                  onClick={() => deletarItemCarrinho(item)}
+                >
+                  Remover
+                </button>
+              </DivCardCarrinho>
+            ))
+          )}
+        </Sectionn>
+        {lanchesCarrinho.length !== 0 && (
+          <>
+            <div className="divTotal">
+              <span>Total</span>
+              <p>R$ {total.toFixed(2)}</p>
+            </div>
+            <button onClick={() => deletarTodositens()}>Remover todos</button>
+          </>
+        )}
+      </Aside>
+    );
+  }
+
+  export default Cart;
